@@ -1,4 +1,4 @@
-<html><head><meta charset="Windows-1252"> 
+<html><head><meta charset="UTF-8"> 
 <style> 
 *{box-sizing: border-box;} 
 body{font-family:'Segoe UI',sans-serif;margin:0;display:flex;height:100vh;background-color:#f4f7f6;overflow:hidden;} 
@@ -20,24 +20,24 @@ td{border:1px solid #e0e0e0;padding:6px 2px;text-align:center;font-weight:bold;c
 </style> 
 <script> 
 function copiarTexto() { 
-  var range = document.createRange(); range.selectNode(document.getElementById('notif-content')); 
-  window.getSelection().removeAllRanges(); window.getSelection().addRange(range); 
-  document.execCommand('copy'); 
-  var btn = document.getElementById('btnCopiar'); btn.innerText = '¡Copiado'; btn.style.backgroundColor = '#27ae60'; 
-  setTimeout(function() { btn.innerText = 'Copiar Texto'; btn.style.backgroundColor = '#3498db'; }, 2000); 
+  var range = document.createRange(); range.selectNode(document.getElementById('notif-content')); 
+  window.getSelection().removeAllRanges(); window.getSelection().addRange(range); 
+  document.execCommand('copy'); 
+  var btn = document.getElementById('btnCopiar'); btn.innerText = 'Ã¯Â¿Â½Copiado'; btn.style.backgroundColor = '#27ae60'; 
+  setTimeout(function() { btn.innerText = 'Copiar Texto'; btn.style.backgroundColor = '#3498db'; }, 2000); 
 } 
 </script> 
 </head><body> 
 <div class="panel-izq"> 
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"> 
-    <h2 style="margin:0;">Sistema de Monitoreo SMEC - GENNEIA</h2> 
-    <div style="font-size:11px;color:#495057;background:#e9ecef;padding:4px 10px;border-radius:15px;font-weight:600;">Control: 01/04/2026 - 10:03 hs</div> 
-  </div> 
-  <table> 
-    <tr> 
-      <th class="col-smec">SMEC - CENTRAL</th><th style="width:45px">META</th> 
-      <th>28/03</th><th>29/03</th><th>30/03</th><th>31/03</th><th>01/04</th> 
-    </tr> 
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"> 
+    <h2 style="margin:0;">Sistema de Monitoreo SMEC - GENNEIA</h2> 
+    <div style="font-size:11px;color:#495057;background:#e9ecef;padding:4px 10px;border-radius:15px;font-weight:600;">Control: 01/04/2026 - 15:16 hs</div> 
+  </div> 
+  <table> 
+    <tr> 
+      <th class="col-smec">SMEC - CENTRAL</th><th style="width:45px">META</th> 
+      <th>28/03</th><th>29/03</th><th>30/03</th><th>31/03</th><th>01/04</th> 
+    </tr> 
 <tr><td class="col-smec">PSANM71C - Anchoris ll</td><td class="col-meta">672</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-leyendo">LEYENDO</td></tr>
 <tr><td class="col-smec">PSANM71P - Anchoris ll</td><td class="col-meta">672</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-leyendo">LEYENDO</td></tr>
 <tr><td class="col-smec">PSANM72C - Anchoris lV</td><td class="col-meta">672</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-leyendo">LEYENDO</td></tr>
@@ -168,18 +168,18 @@ function copiarTexto() {
 <tr><td class="col-smec">ULL3M71P - Villalonga I</td><td class="col-meta">672</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-leyendo">LEYENDO</td></tr>
 <tr><td class="col-smec">VIL1M61C - Villalonga I</td><td class="col-meta">672</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-leyendo">LEYENDO</td></tr>
 <tr><td class="col-smec">VIL1M61P - Villalonga II</td><td class="col-meta">672</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-leyendo">LEYENDO</td></tr>
-  </table> 
+  </table> 
   <div class="about-section">Desarrollado por Christian Pereyra - Soporte BLC PowerGeneration</div> 
 </div> 
 <div class="panel-der"> 
   <div class="notif-header"> 
-    <h3>Notificación para Clientes</h3> 
+    <h3>Notificaci&oacute;n para Clientes</h3> 
     <button id="btnCopiar" class="btn-copy" onclick="copiarTexto()">Copiar Texto</button> 
   </div> 
   <div id="notif-content" class="copy-area"> 
 Estimado equipo Genneia,<br><br> 
 Durante el control de la disponibilidad de datos de los medidores SMEC en el servidor SVM-IDEO-PRD SMEC, se detectaron posibles inconvenientes en la lectura de los siguientes equipos:<br><br> 
-<br><b>Central: BRAGADO II</b><br>&nbsp;&nbsp;Medidor BRA2M21P (desde el 22/03/2026)<br>                                                                
+Ã¯Â»Â¿<br><b>Central: BRAGADO II</b><br>&nbsp;&nbsp;Medidor BRA2M21P (desde el 22/03/2026)<br>                                                                
 &nbsp;&nbsp;Medidor BRA2M22P (desde el 18/03/2026)<br>                                                                                                  
 &nbsp;&nbsp;Medidor BRA2S23C (desde el 18/03/2026)<br>                                                                                                  
 &nbsp;&nbsp;Medidor BRA2S23P (desde el 18/03/2026)<br>                                                                                                  
@@ -195,10 +195,9 @@ Durante el control de la disponibilidad de datos de los medidores SMEC en el ser
 &nbsp;&nbsp;Medidor SJSUM73P (desde el 31/03/2026)<br>                                                                                                
 &nbsp;&nbsp;Medidor SJSUM74C (desde el 31/03/2026)<br>                                                                                                
 &nbsp;&nbsp;Medidor SJSUM74P (desde el 31/03/2026)<br>                                                                                                
-<br>Se observaron faltantes parciales de información y/o lecturas incompletas en los períodos indicados.<br><br> 
-Se solicita, por favor, verificar el estado de los enlaces de comunicación y/o la conectividad de los equipos involucrados.<br><br> 
-Quedamos a disposición ante cualquier consulta.<br><br> 
+<br>Se observaron faltantes parciales de informaci&oacute;n y/o lecturas incompletas en los per&iacute;odos indicados.<br><br> 
+Se solicita, por favor, verificar el estado de los enlaces de comunicaci&oacute;n y/o la conectividad de los equipos involucrados.<br><br> 
+Quedamos a disposici&oacute;n ante cualquier consulta.<br><br> 
 Saludos cordiales, 
   </div> 
 </div> 
-</body></html> 
