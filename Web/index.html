@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard General SMEC</title>
+    <style>
+        :root {
+            --blc-blue: #3399FF; /* Celeste exacto */
+            --bg: #f4f7f6;
+            --danger: #e74c3c;
+            --genneia: #0056b3; 
+            --msu: #f39c12;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); margin: 0; padding: 10px; }
+        .container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; height: 98vh; }
+        
+        /* Cabecera unificada en una línea */
+        header { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            padding: 15px 5px;
+            margin-bottom: 10px;
+        }
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .icon-smec { height: 50px; width: auto; } /* Ícono recortado */
+        header h1 { 
+            margin: 0; 
+            font-size: 2.3rem; /* Título grande */
+            color: var(--blc-blue); 
+            font-weight: bold;
+        }
+        /* AUMENTAMOS el tamaño del logo BLC para equilibrar */
+        .logo-blc { height: 60px; width: auto; margin-right: 5px; } 
+        
+        .nav-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; }
+        .btn-access { 
+            display: block; padding: 15px; text-align: center; text-decoration: none; 
+            color: white; font-weight: bold; border-radius: 8px; font-size: 1rem; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .btn-genneia { background-color: var(--genneia); }
+        .btn-msu { background-color: var(--msu); }
+
+        .card { 
+            background: white; padding: 15px; border-radius: 10px; 
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            display: flex; flex-direction: column; flex-grow: 1; overflow: hidden;
+        }
+
+        .incidents-header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            margin-bottom: 12px;
+        }
+        .incidents-header h3 { 
+            color: var(--danger); border-left: 4px solid var(--danger); 
+            padding-left: 10px; margin: 0; font-size: 1.1rem; 
+        }
+
+        .table-wrapper { overflow-y: auto; flex-grow: 1; border-radius: 8px; border: 1px solid #eee; }
+        table { width: 100%; border-collapse: collapse; min-width: 800px; }
+        
+        /* Cabecera de tabla en celeste */
+        thead th { 
+            position: sticky; top: 0; 
+            background: var(--blc-blue); 
+            color: white; padding: 12px 10px; 
+            font-size: 0.9rem; z-index: 5; text-align: left; 
+        }
+        
+        td { border-bottom: 1px solid #eee; padding: 12px 10px; font-size: 0.85rem; vertical-align: middle; }
+        .badge { padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 0.7rem; }
+        .badge-abierto { background: #f8d7da; color: #721c24; }
+        .badge-cerrado { background: #d4edda; color: #155724; }
+        
+        .client-tag { font-weight: bold; padding: 3px 6px; border-radius: 3px; font-size: 0.7rem; color: white; display: inline-block; min-width: 60px; text-align: center; }
+        .tag-genneia { background: var(--genneia); }
+        .tag-msu { background: var(--msu); }
+
+        footer { text-align: center; padding: 10px; font-size: 0.75rem; color: #888; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="header-left">
+            <img src="icono_smec.png" alt="SMEC" class="icon-smec">
+            <h1>Dashboard General SMEC</h1>
+        </div>
+        <img src="logo_blc.png" alt="BLC PowerGeneration" class="logo-blc">
+    </header>
+
+    <div class="nav-buttons">
+        <a href="Gestion_GENNEIA.html" class="btn-access btn-genneia">MONITOREO GENNEIA</a>
+        <a href="Gestion_MSU.html" class="btn-access btn-msu">MONITOREO MSU</a>
+    </div>
+
+    <div class="card">
+        <div class="incidents-header">
+            <h3>Inconvenientes Activos y Recientes</h3>
+            <div style="display: flex; gap: 8px;">
+                <a href="Historico_Eventos_SMEC_GENNEIA.csv" download class="client-tag tag-genneia" style="text-decoration:none; padding:6px 10px;">📥 GENNEIA</a>
+                <a href="Historico_Eventos_SMEC_MSU.csv" download class="client-tag tag-msu" style="text-decoration:none; padding:6px 10px;">📥 MSU</a>
+            </div>
+        </div>
+        
+        <div class="table-wrapper" id="tabla-container">
+            <p style="text-align:center; padding:20px; color:#666;">Cargando datos SMEC...</p>
+        </div>
+    </div>
+
+    <footer>Desarrollado por Christian Pereyra - Soporte Técnico BLC</footer>
+</div>
+
+<script>
+    async function cargarDashboard() {
+        const archivos = [
+            { name: 'Historico_Eventos_SMEC_GENNEIA.csv', client: 'GENNEIA' },
+            { name: 'Historico_Eventos_SMEC_MSU.csv', client: 'MSU' }
+        ];
+
+        // 1. Agregamos la columna "Fin" en la cabecera
+        let html = '<table><thead><tr><th>Cliente</th><th>Central</th><th>Medidor</th><th>Inicio</th><th>Fin</th><th>Estado</th><th>Observaciones</th></tr></thead><tbody>';
+        let items = 0;
+        
+        const hoy = new Date();
+        const fechasValidas = [];
+        for(let i=0; i<3; i++) {
+            const d = new Date(); d.setDate(hoy.getDate() - i);
+            fechasValidas.push(d.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+        }
+
+        for (const arc of archivos) {
+            try {
+                const res = await fetch(arc.name + '?v=' + Date.now());
+                if (!res.ok) continue;
+                const data = await res.text();
+                const filas = data.split(/\r?\n/).slice(1);
+
+                filas.forEach(linea => {
+                    if (!linea.trim()) return;
+                    const col = linea.replace(/"/g, '').split(';');
+                    if (col.length < 5) return;
+
+                    const inicio = col[2] ? col[2].trim() : '-';
+                    const fin = col[3] ? col[3].trim() : '-';
+                    const estado = col[4].trim();
+                    
+                    // Lógica para mostrar: Abiertos O Cerrados en los últimos 3 días
+                    if (estado.toLowerCase() === 'abierto' || fechasValidas.includes(fin)) {
+                        const tagClase = arc.client === 'GENNEIA' ? 'tag-genneia' : 'tag-msu';
+                        const badgeClase = estado.toLowerCase() === 'abierto' ? 'badge-abierto' : 'badge-cerrado';
+                        
+                        // Si está abierto, la fecha de fin se muestra como "-"
+                        const fechaFinMostrar = estado.toLowerCase() === 'abierto' ? '---' : `<b>${fin}</b>`;
+
+                        html += `<tr>
+                            <td><span class="client-tag ${tagClase}">${arc.client}</span></td>
+                            <td><b>${col[0]}</b></td>
+                            <td>${col[1]}</td>
+                            <td>${inicio}</td>
+                            <td>${fechaFinMostrar}</td>
+                            <td><span class="badge ${badgeClase}">${estado.toUpperCase()}</span></td>
+                            <td>${col[5] || ''}</td>
+                        </tr>`;
+                        items++;
+                    }
+                });
+            } catch (e) {}
+        }
+
+        document.getElementById('tabla-container').innerHTML = items > 0 ? html + '</tbody></table>' : '<p style="text-align:center;padding:15px;font-size:0.8rem;color:gray;">Sin inconvenientes activos.</p>';
+    }
+    window.onload = cargarDashboard;
+</script>
+</body>
+</html>
