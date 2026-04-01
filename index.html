@@ -121,7 +121,8 @@
             { name: 'Historico_Eventos_SMEC_MSU.csv', client: 'MSU' }
         ];
 
-        let html = '<table><thead><tr><th>Cliente</th><th>Central</th><th>Medidor</th><th>Inicio</th><th>Estado</th><th>Observaciones</th></tr></thead><tbody>';
+        // 1. Agregamos la columna "Fin" en la cabecera
+        let html = '<table><thead><tr><th>Cliente</th><th>Central</th><th>Medidor</th><th>Inicio</th><th>Fin</th><th>Estado</th><th>Observaciones</th></tr></thead><tbody>';
         let items = 0;
         
         const hoy = new Date();
@@ -143,15 +144,24 @@
                     const col = linea.replace(/"/g, '').split(';');
                     if (col.length < 5) return;
 
-                    const estado = col[4].trim();
+                    const inicio = col[2] ? col[2].trim() : '-';
                     const fin = col[3] ? col[3].trim() : '-';
+                    const estado = col[4].trim();
                     
+                    // Lógica para mostrar: Abiertos O Cerrados en los últimos 3 días
                     if (estado.toLowerCase() === 'abierto' || fechasValidas.includes(fin)) {
                         const tagClase = arc.client === 'GENNEIA' ? 'tag-genneia' : 'tag-msu';
                         const badgeClase = estado.toLowerCase() === 'abierto' ? 'badge-abierto' : 'badge-cerrado';
+                        
+                        // Si está abierto, la fecha de fin se muestra como "-"
+                        const fechaFinMostrar = estado.toLowerCase() === 'abierto' ? '---' : `<b>${fin}</b>`;
+
                         html += `<tr>
                             <td><span class="client-tag ${tagClase}">${arc.client}</span></td>
-                            <td><b>${col[0]}</b></td><td>${col[1]}</td><td>${col[2]}</td>
+                            <td><b>${col[0]}</b></td>
+                            <td>${col[1]}</td>
+                            <td>${inicio}</td>
+                            <td>${fechaFinMostrar}</td>
                             <td><span class="badge ${badgeClase}">${estado.toUpperCase()}</span></td>
                             <td>${col[5] || ''}</td>
                         </tr>`;
