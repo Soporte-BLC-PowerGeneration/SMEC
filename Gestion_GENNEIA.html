@@ -31,7 +31,7 @@ function copiarTexto() {
 <div class="panel-izq"> 
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"> 
     <h2 style="margin:0;">Sistema de Monitoreo SMEC - GENNEIA</h2> 
-    <div style="font-size:11px;color:#495057;background:#e9ecef;padding:4px 10px;border-radius:15px;font-weight:600;">Control: 02/04/2026 - 13:09 hs</div> 
+    <div style="font-size:11px;color:#495057;background:#e9ecef;padding:4px 10px;border-radius:15px;font-weight:600;">Control: 02/04/2026 - 13:15 hs</div> 
   </div> 
   <table> 
     <tr> 
@@ -172,16 +172,14 @@ function copiarTexto() {
   <div class="about-section">Desarrollado por Christian Pereyra - Soporte BLC PowerGeneration</div> 
 </div> 
 <div class="panel-der"> 
-  <div class="notif-header"> 
-    <h3>Notificaci&oacute;n para Clientes</h3> 
-    <button id="btnCopiar" class="btn-copy" onclick="copiarTexto()">Copiar Texto</button> 
-  </div> 
-  <div id="notif-content" class="copy-area"> 
-Estimado equipo Genneia,<br><br> 
-Durante el control de la disponibilidad de datos de los medidores SMEC en el servidor SVM-IDEO-PRD SMEC, se detectaron posibles inconvenientes en la lectura de los siguientes equipos:<br><br> 
-<br>Se observaron faltantes parciales de informaci&oacute;n y/o lecturas incompletas en los per&iacute;odos indicados.<br><br> 
-Se solicita, por favor, verificar el estado de los enlaces de comunicaci&oacute;n y/o la conectividad de los equipos involucrados.<br><br> 
-Quedamos a disposici&oacute;n ante cualquier consulta.<br><br> 
-Saludos cordiales, 
-  </div> 
+   <div class="notif-header"> 
+     <h3>Notificaci&oacute;n para Clientes</h3> 
+     <button id="btnCopiar" class="btn-copy" onclick="copiarTexto()">Copiar Texto</button> 
+   </div> 
+<div id="notif-content" class="copy-area" style="text-align:center; border-color:#27ae60; padding:40px 20px;"> 
+<img src="ok.png" style="width:80px; margin-bottom:15px;"><br> 
+<b style="color:#27ae60; font-size:18px;">SIN INCONVENIENTES DETECTADOS</b><br><br> 
+Todos los medidores se encuentran reportando correctamente.<br><br> 
+No se requiere el env&iacute;o de notificaciones al cliente. 
+</div> 
 </div> 
