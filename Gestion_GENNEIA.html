@@ -8,8 +8,11 @@ table{border-collapse:collapse;width:100%;font-size:11px;table-layout:fixed;}
 th{background-color:#34495e;color:white;padding:10px 2px;position:sticky;top:0;z-index:10;font-weight:bold;text-transform:uppercase;border:1px solid #2c3e50;} 
 td{border:1px solid #e0e0e0;padding:6px 2px;text-align:center;font-weight:bold;color:#2c3e50;} 
 .col-smec{text-align:left; width:220px; padding-left:10px; font-weight:bold;} 
+.col-meta{width:35px; color:#7f8c8d; font-weight:normal;} 
 .status-ok{background-color:#c6efce;color:#006100;} 
+.status-leyendo{background-color:#c6efce; color:#006100} 
 .status-error{background-color:#f8d7da;color:#721c24;} 
+.status-parcial{background-color:#fff3cd;color:#856404;} 
 .about-section{margin-top:auto; padding-top:20px; font-size:10px; color:#bdc3c7; text-align:right; font-style:italic;} 
 .notif-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;} 
 .copy-area{background-color:white;border:1px dashed #3498db;padding:20px;font-size:12px;line-height:1.6;border-radius:5px;} 
@@ -20,7 +23,7 @@ function copiarTexto() {
   var range = document.createRange(); range.selectNode(document.getElementById('notif-content')); 
   window.getSelection().removeAllRanges(); window.getSelection().addRange(range); 
   document.execCommand('copy'); 
-  var btn = document.getElementById('btnCopiar'); btn.innerText = 'Â¡Copiado'; btn.style.backgroundColor = '#27ae60'; 
+  var btn = document.getElementById('btnCopiar'); btn.innerText = 'ï¿½Copiado'; btn.style.backgroundColor = '#27ae60'; 
   setTimeout(function() { btn.innerText = 'Copiar Texto'; btn.style.backgroundColor = '#3498db'; }, 2000); 
 } 
 </script> 
@@ -28,7 +31,7 @@ function copiarTexto() {
 <div class="panel-izq"> 
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"> 
     <h2 style="margin:0;">Sistema de Monitoreo SMEC - GENNEIA</h2> 
-    <div style="font-size:11px;color:#495057;background:#e9ecef;padding:4px 10px;border-radius:15px;font-weight:600;">Control: 02/04/2026 - 11:54 hs</div> 
+    <div style="font-size:11px;color:#495057;background:#e9ecef;padding:4px 10px;border-radius:15px;font-weight:600;">Control: 02/04/2026 - 13:09 hs</div> 
   </div> 
   <table> 
     <tr> 
@@ -171,11 +174,14 @@ function copiarTexto() {
 <div class="panel-der"> 
   <div class="notif-header"> 
     <h3>Notificaci&oacute;n para Clientes</h3> 
+    <button id="btnCopiar" class="btn-copy" onclick="copiarTexto()">Copiar Texto</button> 
   </div> 
-  <div id="notif-content" class="copy-area" style="text-align:center; border-color:#27ae60; padding:40px 20px;"> 
-<b style="color:#27ae60; font-size:16px;">âœ” Sin inconvenientes detectados</b><br><br> 
-Todos los medidores se encuentran reportando correctamente.<br><br> 
-No se requiere el env&iacute;o de notificaciones al cliente. 
+  <div id="notif-content" class="copy-area"> 
+Estimado equipo Genneia,<br><br> 
+Durante el control de la disponibilidad de datos de los medidores SMEC en el servidor SVM-IDEO-PRD SMEC, se detectaron posibles inconvenientes en la lectura de los siguientes equipos:<br><br> 
+<br>Se observaron faltantes parciales de informaci&oacute;n y/o lecturas incompletas en los per&iacute;odos indicados.<br><br> 
+Se solicita, por favor, verificar el estado de los enlaces de comunicaci&oacute;n y/o la conectividad de los equipos involucrados.<br><br> 
+Quedamos a disposici&oacute;n ante cualquier consulta.<br><br> 
+Saludos cordiales, 
   </div> 
 </div> 
-</body></html> 
