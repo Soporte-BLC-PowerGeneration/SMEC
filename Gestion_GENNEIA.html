@@ -27,7 +27,7 @@ td{border:1px solid #e0e0e0;padding:6px 2px;text-align:center;font-weight:bold;c
 function copiarTexto() { 
   var area = document.getElementById('notif-content'); 
   var temp = document.createElement('textarea'); 
-  temp.value = "Estimado equipo Genneia,\n\n" + area.innerText + "\n\nQuedamos a disposicion ante cualquier consulta.\n\nSaludos\n" + document.querySelector('.about-section').innerText; 
+  temp.value = "Estimado equipo Genneia,\n\n" + area.innerText + "\n\nQuedamos a disposici\u00f3n ante cualquier consulta.\n\nSaludos,\nChristian Pereyra"; 
   document.body.appendChild(temp); temp.select(); document.execCommand('copy'); document.body.removeChild(temp); 
   var btn = document.getElementById('btnCopiar'); btn.innerText = 'COPIADO'; 
   setTimeout(function() { btn.innerText = 'COPIAR'; }, 2000); 
@@ -37,8 +37,7 @@ function enviarOutlook() {
   var cc = "Hector.Alvarado@genneia.com.ar;Centro.ControlOperativo@genneia.com.ar;soporte_blc@blcglobal.net;l.sanchez@blcglobal.net;c.pereyra@blcglobal.net;y.espindola@blcglobal.net"; 
   var asunto = "Estado Monitoreo SMEC - 06/04/2026"; 
   var textoBase = document.getElementById('notif-content').innerText; 
-  var firma = document.querySelector('.about-section').innerText; 
-  var cuerpo = "Estimado equipo Genneia,\n\n" + textoBase + "\n\nQuedamos a disposicion ante cualquier consulta.\n\nSaludos\n" + firma; 
+  var cuerpo = "Estimado equipo Genneia,\n\n" + textoBase + "\n\nQuedamos a disposici\u00f3n ante cualquier consulta.\n\nSaludos,\nChristian Pereyra"; 
   window.location.href = "mailto:" + para + "?cc=" + cc + "&subject=" + encodeURIComponent(asunto) + "&body=" + encodeURIComponent(cuerpo); 
 } 
 </script> 
@@ -46,7 +45,7 @@ function enviarOutlook() {
 <div class="panel-izq"> 
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"> 
     <h2 style="margin:0;">Sistema de Monitoreo SMEC - GENNEIA</h2> 
-    <div style="font-size:11px;color:#495057;background:#e9ecef;padding:4px 10px;border-radius:15px;font-weight:600;">Control: 06/04/2026 - 01:15 hs</div> 
+    <div style="font-size:11px;color:#495057;background:#e9ecef;padding:4px 10px;border-radius:15px;font-weight:600;">Control: 06/04/2026 - 01:27 hs</div> 
   </div> 
   <table> 
     <tr> 
@@ -201,7 +200,7 @@ function enviarOutlook() {
       </div> 
    </div> 
 <div id="notif-content" class="copy-area"> 
-Durante el control de la disponibilidad de datos de los medidores SMEC en el servidor SVM-IDEO-PRD SMEC, se detectaron posibles inconvenientes en la lectura de los siguientes equipos:<br><br> 
+Durante el control de la disponibilidad de datos de los medidores SMEC en el servidor SVM-IDEO-PRD SMEC, se detectaron posibles inconvenientes en la lectura de los siguientes equipos:<br> 
 <br><b>Central: Anchoris ll</b><br>&nbsp;&nbsp;Medidor PSANM71C (desde el 05/04/2026)<br>                                                              
 &nbsp;&nbsp;Medidor PSANM71P (desde el 05/04/2026)<br>                                                                                                 
 <br><b>Central: Anchoris lV</b><br>&nbsp;&nbsp;Medidor PSANM72C (desde el 05/04/2026)<br>                                                              
