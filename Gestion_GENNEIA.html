@@ -25,27 +25,28 @@ td{border:1px solid #e0e0e0;padding:6px 2px;text-align:center;font-weight:bold;c
 </style> 
 <script> 
 function copiarTexto() { 
-  var range = document.createRange(); range.selectNode(document.getElementById('notif-content')); 
-  window.getSelection().removeAllRanges(); window.getSelection().addRange(range); 
-  document.execCommand('copy'); 
-  var btn = document.getElementById('btnCopiar'); btn.innerText = 'COPIADO'; btn.style.backgroundColor = '#27ae60'; 
-  setTimeout(function() { btn.innerText = 'COPIAR'; btn.style.backgroundColor = '#3498db'; }, 2000); 
+  var area = document.getElementById('notif-content'); 
+  var temp = document.createElement('textarea'); 
+  temp.value = "Estimado equipo Genneia,\n\n" + area.innerText + "\n\nQuedamos a disposicion ante cualquier consulta.\n\nSaludos\n" + document.querySelector('.about-section').innerText; 
+  document.body.appendChild(temp); temp.select(); document.execCommand('copy'); document.body.removeChild(temp); 
+  var btn = document.getElementById('btnCopiar'); btn.innerText = 'COPIADO'; 
+  setTimeout(function() { btn.innerText = 'COPIAR'; }, 2000); 
 } 
 function enviarOutlook() { 
   var para = "Denis.Paez@genneia.com.ar"; 
   var cc = "Hector.Alvarado@genneia.com.ar;Centro.ControlOperativo@genneia.com.ar;soporte_blc@blcglobal.net;l.sanchez@blcglobal.net;c.pereyra@blcglobal.net;y.espindola@blcglobal.net"; 
-  var asunto = "Estado Monitoreo SMEC - " + "06/04/2026"; 
+  var asunto = "Estado Monitoreo SMEC - 06/04/2026"; 
+  var textoBase = document.getElementById('notif-content').innerText; 
   var firma = document.querySelector('.about-section').innerText; 
-  var cuerpo = "Estimado equipo Genneia,\n\n" + document.getElementById('notif-content').innerText + "\n\nSaludos,\n" + firma; 
-  var mailtoLink = "mailto:" + para + "?cc=" + cc + "^&subject=" + encodeURIComponent(asunto) + "^&body=" + encodeURIComponent(cuerpo); 
-  window.location.href = mailtoLink.replace(/\/g, ''); 
+  var cuerpo = "Estimado equipo Genneia,\n\n" + textoBase + "\n\nQuedamos a disposicion ante cualquier consulta.\n\nSaludos\n" + firma; 
+  window.location.href = "mailto:" + para + "?cc=" + cc + "&subject=" + encodeURIComponent(asunto) + "&body=" + encodeURIComponent(cuerpo); 
 } 
 </script> 
 </head><body> 
 <div class="panel-izq"> 
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"> 
     <h2 style="margin:0;">Sistema de Monitoreo SMEC - GENNEIA</h2> 
-    <div style="font-size:11px;color:#495057;background:#e9ecef;padding:4px 10px;border-radius:15px;font-weight:600;">Control: 06/04/2026 - 01:09 hs</div> 
+    <div style="font-size:11px;color:#495057;background:#e9ecef;padding:4px 10px;border-radius:15px;font-weight:600;">Control: 06/04/2026 - 01:15 hs</div> 
   </div> 
   <table> 
     <tr> 
