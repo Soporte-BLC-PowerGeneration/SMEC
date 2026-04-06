@@ -28,10 +28,19 @@ function copiarTexto() {
 } 
 </script> 
 </head><body> 
+function enviarOutlook() { 
+  var para = "Denis.Paez@genneia.com.ar"; 
+  var cc = "Hector.Alvarado@genneia.com.ar";"Centro.ControlOperativo@genneia.com.ar";"soporte_blc@blcglobal.net";"l.sanchez@blcglobal.net";"c.pereyra@blcglobal.net";"y.espindola@blcglobal.net" 
+  var asunto = "Estado Monitoreo SMEC - " + new Date().toLocaleDateString(); 
+  var cuerpo = document.getElementById('notif-content').innerText; 
+  window.location.href = "mailto:" + para + "?cc=" + cc + "^&subject=" + encodeURIComponent(asunto) + "^&body=" + encodeURIComponent(cuerpo); 
+} 
+</script> 
+<body> 
 <div class="panel-izq"> 
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"> 
     <h2 style="margin:0;">Sistema de Monitoreo SMEC - GENNEIA</h2> 
-    <div style="font-size:11px;color:#495057;background:#e9ecef;padding:4px 10px;border-radius:15px;font-weight:600;">Control: 05/04/2026 - 07:30 hs</div> 
+    <div style="font-size:11px;color:#495057;background:#e9ecef;padding:4px 10px;border-radius:15px;font-weight:600;">Control: 05/04/2026 - 23:02 hs</div> 
   </div> 
   <table> 
     <tr> 
@@ -170,7 +179,6 @@ function copiarTexto() {
 <tr><td class="col-smec">VIL1M61P - Villalonga II</td><td class="col-meta">672</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-leyendo">LEYENDO</td></tr>
   </table> 
   <div class="about-section">Desarrollado por Christian Pereyra - Soporte BLC PowerGeneration</div> 
-</div> 
 <div class="panel-der"> 
    <div class="notif-header"> 
      <h3>Notificaci&oacute;n para Clientes</h3> 
