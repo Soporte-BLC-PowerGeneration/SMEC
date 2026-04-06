@@ -8,39 +8,42 @@ table{border-collapse:collapse;width:100%;font-size:11px;table-layout:fixed;}
 th{background-color:#34495e;color:white;padding:10px 2px;position:sticky;top:0;z-index:10;font-weight:bold;text-transform:uppercase;border:1px solid #2c3e50;} 
 td{border:1px solid #e0e0e0;padding:6px 2px;text-align:center;font-weight:bold;color:#2c3e50;} 
 .col-smec{text-align:left; width:220px; padding-left:10px; font-weight:bold;} 
-.col-meta{width:35px; color:#7f8c8d; font-weight:normal;} 
+.col-meta{width:45px; color:#95a5a6; font-weight:normal important;} 
 .status-ok{background-color:#c6efce;color:#006100;} 
 .status-leyendo{background-color:#c6efce; color:#006100} 
 .status-error{background-color:#f8d7da;color:#721c24;} 
-.status-parcial{background-color:#fff3cd;color:#856404;} 
-.about-section{margin-top:auto; padding-top:20px; font-size:10px; color:#bdc3c7; text-align:right; font-style:italic;} 
-.notif-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;} 
+.footer-info{display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding:10px 5px; border-top:1px solid #eee; background:#fff;} 
+.stats-box{font-size:12px; color:#546e7a; font-weight:600; display:flex; gap:15px;} 
+.stats-item b{color:#3498db; font-size:13px;} 
+.about-section{font-size:10px; color:#bdc3c7; font-style:italic;} 
+.notif-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;} 
+.btn-group{display:flex; gap:8px;} 
+.btn-copy, .btn-outlook{border:none; padding:8px 12px; border-radius:4px; cursor:pointer; font-weight:bold; transition: 0.3s; font-family:'Segoe UI',sans-serif; font-size:11px; color:white; text-transform:uppercase;} 
+.btn-copy{background-color:#3498db;} 
+.btn-outlook{background-color:#28a745;} 
 .copy-area{background-color:white;border:1px dashed #3498db;padding:20px;font-size:12px;line-height:1.6;border-radius:5px;} 
-.btn-copy{background-color:#3498db;color:white;border:none;padding:8px 15px;border-radius:4px;cursor:pointer;font-weight:bold;width:120px;transition: 0.3s;} 
 </style> 
 <script> 
 function copiarTexto() { 
   var range = document.createRange(); range.selectNode(document.getElementById('notif-content')); 
   window.getSelection().removeAllRanges(); window.getSelection().addRange(range); 
   document.execCommand('copy'); 
-  var btn = document.getElementById('btnCopiar'); btn.innerText = 'ï¿½Copiado'; btn.style.backgroundColor = '#27ae60'; 
-  setTimeout(function() { btn.innerText = 'Copiar Texto'; btn.style.backgroundColor = '#3498db'; }, 2000); 
+  var btn = document.getElementById('btnCopiar'); btn.innerText = 'COPIADO'; btn.style.backgroundColor = '#27ae60'; 
+  setTimeout(function() { btn.innerText = 'COPIAR'; btn.style.backgroundColor = '#3498db'; }, 2000); 
 } 
-</script> 
-</head><body> 
 function enviarOutlook() { 
   var para = "Denis.Paez@genneia.com.ar"; 
-  var cc = "Hector.Alvarado@genneia.com.ar";"Centro.ControlOperativo@genneia.com.ar";"soporte_blc@blcglobal.net";"l.sanchez@blcglobal.net";"c.pereyra@blcglobal.net";"y.espindola@blcglobal.net" 
+  var cc = "Hector.Alvarado@genneia.com.ar;Centro.ControlOperativo@genneia.com.ar;soporte_blc@blcglobal.net;l.sanchez@blcglobal.net;c.pereyra@blcglobal.net;y.espindola@blcglobal.net"; 
   var asunto = "Estado Monitoreo SMEC - " + new Date().toLocaleDateString(); 
   var cuerpo = document.getElementById('notif-content').innerText; 
   window.location.href = "mailto:" + para + "?cc=" + cc + "^&subject=" + encodeURIComponent(asunto) + "^&body=" + encodeURIComponent(cuerpo); 
 } 
 </script> 
-<body> 
+</head><body> 
 <div class="panel-izq"> 
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"> 
     <h2 style="margin:0;">Sistema de Monitoreo SMEC - GENNEIA</h2> 
-    <div style="font-size:11px;color:#495057;background:#e9ecef;padding:4px 10px;border-radius:15px;font-weight:600;">Control: 05/04/2026 - 23:02 hs</div> 
+    <div style="font-size:11px;color:#495057;background:#e9ecef;padding:4px 10px;border-radius:15px;font-weight:600;">Control: 05/04/2026 - 23:19 hs</div> 
   </div> 
   <table> 
     <tr> 
@@ -178,11 +181,21 @@ function enviarOutlook() {
 <tr><td class="col-smec">VIL1M61C - Villalonga I</td><td class="col-meta">672</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-leyendo">LEYENDO</td></tr>
 <tr><td class="col-smec">VIL1M61P - Villalonga II</td><td class="col-meta">672</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-ok">OK</td><td class="status-leyendo">LEYENDO</td></tr>
   </table> 
-  <div class="about-section">Desarrollado por Christian Pereyra - Soporte BLC PowerGeneration</div> 
+  <div class="footer-info"> 
+    <div class="stats-box"> 
+      <span class="stats-item">Medidores: <b>130</b></span> 
+      <span class="stats-item">Centrales: <b>28</b></span> 
+    </div> 
+    <div class="about-section">Desarrollado por Christian Pereyra - Soporte BLC PowerGeneration</div> 
+  </div> 
+</div> 
 <div class="panel-der"> 
    <div class="notif-header"> 
-     <h3>Notificaci&oacute;n para Clientes</h3> 
-     <button id="btnCopiar" class="btn-copy" onclick="copiarTexto()">Copiar Texto</button> 
+      <h3 style="margin:0;">Notificaci&oacute;n</h3> 
+      <div class="btn-group"> 
+         <button id="btnCopiar" class="btn-copy" onclick="copiarTexto()">COPIAR</button> 
+         <button class="btn-outlook" onclick="enviarOutlook()">ENVIAR CORREO</button> 
+      </div> 
    </div> 
 <div id="notif-content" class="copy-area" style="text-align:center; border-color:#27ae60; padding:40px 20px;"> 
 <img src="ok.png" style="width:45px; margin-bottom:10px;"><br> 
