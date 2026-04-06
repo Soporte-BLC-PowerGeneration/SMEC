@@ -74,9 +74,27 @@
         .badge-abierto { background: #f8d7da; color: #721c24; }
         .badge-cerrado { background: #d4edda; color: #155724; }
         
-        .client-tag { font-weight: bold; padding: 3px 6px; border-radius: 3px; font-size: 0.7rem; color: white; display: inline-block; min-width: 60px; text-align: center; }
-        .tag-genneia { background: var(--genneia); }
-        .tag-msu { background: var(--msu); }
+        .client-tag { 
+            font-weight: bold; 
+            padding: 4px 8px; 
+            border-radius: 4px; 
+            font-size: 0.7rem; 
+            color: white !important; 
+            display: inline-block; 
+            min-width: 60px; 
+            text-align: center; 
+            text-decoration: none !important; /* <--- ESTO QUITA LA LÍNEA AZUL */
+            transition: 0.2s;
+        }
+
+        .client-tag:hover { 
+            text-decoration: none; 
+            color: white; 
+            opacity: 0.9; 
+        }
+
+        .tag-genneia { background-color: var(--genneia); }
+        .tag-msu { background-color: var(--msu); }
 
         footer { text-align: center; padding: 10px; font-size: 0.75rem; color: #888; }
     </style>
@@ -101,8 +119,8 @@
         <div class="incidents-header">
             <h3>Inconvenientes Activos y Recientes</h3>
             <div style="display: flex; gap: 8px;">
-                <a href="Historico_Eventos_SMEC_GENNEIA.csv" download class="client-tag tag-genneia" style="text-decoration:none; padding:6px 10px;">📥 GENNEIA</a>
-                <a href="Historico_Eventos_SMEC_MSU.csv" download class="client-tag tag-msu" style="text-decoration:none; padding:6px 10px;">📥 MSU</a>
+				<a href="Historico_Eventos_SMEC_GENNEIA.csv" download class="client-tag tag-genneia" style="padding:6px 10px;">&#128229; GENNEIA</a>
+				<a href="Historico_Eventos_SMEC_MSU.csv" download class="client-tag tag-msu" style="padding:6px 10px;">&#128229; MSU</a>
             </div>
         </div>
         
@@ -136,7 +154,10 @@
             try {
                 const res = await fetch(arc.name + '?v=' + Date.now());
                 if (!res.ok) continue;
-                const data = await res.text();
+                // Esto fuerza a que el navegador lea el CSV como Latin-1 (acentos de Excel)
+                const buffer = await res.arrayBuffer();
+                const decoder = new TextDecoder('iso-8859-1');
+                const data = decoder.decode(buffer);
                 const filas = data.split(/\r?\n/).slice(1);
 
                 filas.forEach(linea => {
