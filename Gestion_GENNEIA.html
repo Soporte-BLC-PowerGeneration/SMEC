@@ -27,7 +27,7 @@ td{border:1px solid #e0e0e0;padding:6px 2px;text-align:center;font-weight:bold;c
 function copiarTexto() { 
   var area = document.getElementById('notif-content'); 
   var temp = document.createElement('textarea'); 
-  temp.value = "Estimado equipo Genneia,\n\n" + area.innerText + "\n\nQuedamos a disposici\u00f3n ante cualquier consulta.\n\nSaludos,\nChristian Pereyra"; 
+  temp.value = "Estimado equipo Genneia,\n\n" + area.innerText + "\n\nQuedamos a disposici\u00f3n ante cualquier consulta.\n\nSaludos,\n"; 
   document.body.appendChild(temp); temp.select(); document.execCommand('copy'); document.body.removeChild(temp); 
   var btn = document.getElementById('btnCopiar'); btn.innerText = 'COPIADO'; 
   setTimeout(function() { btn.innerText = 'COPIAR'; }, 2000); 
@@ -37,7 +37,7 @@ function enviarOutlook() {
   var cc = "Hector.Alvarado@genneia.com.ar;Centro.ControlOperativo@genneia.com.ar;soporte_blc@blcglobal.net;l.sanchez@blcglobal.net;c.pereyra@blcglobal.net;y.espindola@blcglobal.net"; 
   var asunto = "Estado Monitoreo SMEC - 06/04/2026"; 
   var textoBase = document.getElementById('notif-content').innerText; 
-  var cuerpo = "Estimado equipo Genneia,\n\n" + textoBase + "\n\nQuedamos a disposici\u00f3n ante cualquier consulta.\n\nSaludos,\nChristian Pereyra"; 
+  var cuerpo = "Estimado equipo Genneia,\n\n" + textoBase + "\n\nQuedamos a disposici\u00f3n ante cualquier consulta.\n\nSaludos,\n"; 
   window.location.href = "mailto:" + para + "?cc=" + cc + "&subject=" + encodeURIComponent(asunto) + "&body=" + encodeURIComponent(cuerpo); 
 } 
 </script> 
@@ -45,7 +45,7 @@ function enviarOutlook() {
 <div class="panel-izq"> 
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"> 
     <h2 style="margin:0;">Sistema de Monitoreo SMEC - GENNEIA</h2> 
-    <div style="font-size:11px;color:#495057;background:#e9ecef;padding:4px 10px;border-radius:15px;font-weight:600;">Control: 06/04/2026 - 01:27 hs</div> 
+    <div style="font-size:11px;color:#495057;background:#e9ecef;padding:4px 10px;border-radius:15px;font-weight:600;">Control: 06/04/2026 - 01:41 hs</div> 
   </div> 
   <table> 
     <tr> 
